@@ -1,0 +1,90 @@
+{
+  "kind": "build_request",
+  "title": "Fix app loading failure with robust error handling and auth initialization",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Add a top-level error boundary in App.tsx that catches JavaScript errors during initial render and displays a fallback UI instead of a blank screen.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-user-ja"
+        ],
+        "quotes": [
+          "die app lädt nicht",
+          "ja"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A React ErrorBoundary wraps the root router/layout so that uncaught render errors show a readable fallback message instead of a blank page.",
+        "The fallback UI includes a 'Reload' button that calls window.location.reload()."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Guard the App router initialization so that the authentication state from InternetIdentityProvider is fully resolved before any route component renders, showing a loading spinner in the meantime.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-user-ja"
+        ],
+        "quotes": [
+          "die app lädt nicht"
+        ]
+      },
+      "acceptanceCriteria": [
+        "While the AuthClient is initializing, the app displays a centered loading spinner rather than attempting to render routes.",
+        "Once auth state is resolved, the correct route (landing or vault) renders without a blank or broken state."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Make the LandingPage 'Get Started' button resilient to auth initialization errors: wrap the login call in a try/catch, display a user-friendly error toast on failure, and never leave the button in a permanently disabled or silent-fail state.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-user-ja"
+        ],
+        "quotes": [
+          "die app lädt nicht"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking 'Get Started' while auth is still initializing shows a loading state on the button.",
+        "If the Internet Identity login call throws, an error toast is displayed and the button returns to its default state.",
+        "Authenticated users visiting the landing page are immediately redirected to /vault."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Wrap the useActor hook's actor creation in a try/catch so that a failure to instantiate the backend actor does not crash the app; instead, queries that depend on the actor should gracefully return an empty/error state.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-user-ja"
+        ],
+        "quotes": [
+          "die app lädt nicht"
+        ]
+      },
+      "acceptanceCriteria": [
+        "If actor creation fails, the hook returns null/undefined without throwing.",
+        "React Query hooks that use the actor handle a null actor by skipping the fetch and not crashing the component tree."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "Do not change the backend Motoko actor or data schema."
+  ],
+  "nonGoals": [
+    "Adding new vault features or UI pages.",
+    "Changing the visual design or theme.",
+    "Backend logic changes."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "New project",
+  "architectural_notes": [],
+  "known_issues": [
+    "App fails to load after deployment; likely caused by routing/auth initialization or JavaScript error on startup"
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-add-a-top-level-error-boundary-in-app-tsx-that-catches-javascript-errors-during-initial-render-and-displays-a-fallback-ui-instead-of-a-blank-screen",
+      "title": "Add a top-level error boundary in App.tsx that catches JavaScript errors during initial render and displays a fallback UI instead of a blank screen.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-guard-the-app-router-initialization-so-that-the-authentication-state-from-internetidentityprovider-is-fully-resolved-before-any-route-component-renders-showing-a-loading-spinner-in-the-meantime",
+      "title": "Guard the App router initialization so that the authentication state from InternetIdentityProvider is fully resolved before any route component renders, showing a loading spinner in the meantime.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-landingpage-get-started-button-resilient-to-auth-initialization-errors-wrap-the-login-call-in-a-try-catch-display-a-user-friendly-error-toast-on-failure-and-never-leave-the-button-in-a-permanently-disabled-or-silent-fail-state",
+      "title": "Make the LandingPage 'Get Started' button resilient to auth initialization errors: wrap the login call in a try/catch, display a user-friendly error toast on failure, and never leave the button in a permanently disabled or silent-fail state.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-wrap-the-useactor-hook-s-actor-creation-in-a-try-catch-so-that-a-failure-to-instantiate-the-backend-actor-does-not-crash-the-app-instead-queries-that-depend-on-the-actor-should-gracefully-return-an-empty-error-state",
+      "title": "Wrap the useActor hook's actor creation in a try/catch so that a failure to instantiate the backend actor does not crash the app; instead, queries that depend on the actor should gracefully return an empty/error state.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [],
+  "projectName": "Fix app loading failure with robust error handling and auth initialization",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

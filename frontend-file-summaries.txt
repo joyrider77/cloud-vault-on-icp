@@ -1,0 +1,20 @@
+{
+  "frontend/src/App.tsx": "Main application component that wraps everything in an ErrorBoundary, shows a centered loading spinner while auth is initializing (via AppContent), and only renders the RouterProvider once authentication state is fully resolved.",
+  "frontend/src/components/Header.tsx": "Responsive header component with logo, theme toggle, logout button (visible when authenticated), and authenticated user dropdown menu with navigation and logout functionality that reloads the page after logout.",
+  "frontend/src/components/Footer.tsx": "Footer component displaying copyright, attribution to caffeine.ai with UTM tracking, and a heart icon.",
+  "frontend/src/pages/LandingPage.tsx": "Landing page with hero and feature sections; the \"Get Started\" button shows a loading state while auth initializes or login is in progress, uses try/catch to display a toast on login errors, and redirects authenticated users to /vault via useEffect.",
+  "frontend/src/pages/OnboardingPage.tsx": "Onboarding page shown after first login, explaining vault security features and providing entry to the vault.",
+  "frontend/src/pages/VaultPage.tsx": "Main vault page that fetches and displays real backend data using useVaultQuery, converts backend data structures to VaultItem format, and handles loading states with proper empty state messages.",
+  "frontend/src/pages/SecuritySettingsPage.tsx": "Security settings page displaying encryption status, security preferences, account information, and danger zone actions.",
+  "frontend/src/components/VaultItemCard.tsx": "Reusable card component for displaying vault items with type icon, title, subtitle, favorite indicator, and action menu including edit and delete options.",
+  "frontend/src/components/CreateItemDialog.tsx": "Dialog component with tabbed interface for creating new vault items that integrates with backend mutations, handles form submission with loading states, and displays success/error toast notifications.",
+  "frontend/src/components/ItemDetailDialog.tsx": "Dialog component for viewing vault item details with working async copy-to-clipboard functionality (using `await navigator.clipboard.writeText`), field-specific toast notifications (\"URL copied!\", \"Username copied!\", \"Password copied!\" etc.) with 2-second auto-dismiss, error handling for clipboard failures, password visibility toggle, and action buttons for editing and deleting items.",
+  "frontend/src/components/PasswordGeneratorDialog.tsx": "Password generator dialog with customizable length and character type options, strength indicator, and copy functionality.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all vault CRUD operations with null-safe actor checks; queries return an empty vault constant when actor is unavailable, and mutations throw a clear error when actor is not initialized.",
+  "frontend/index.css": "Global styles with OKLCH color system customized with purple/indigo primary colors for both light and dark modes.",
+  "frontend/src/main.tsx": "Application entry point that sets up React Query, Internet Identity provider, and renders the main App component with correct relative CSS import.",
+  "frontend/src/index.css": "Global styles with OKLCH color system customized with purple/indigo primary colors for both light and dark modes.",
+  "frontend/src/components/ConfirmDeleteDialog.tsx": "Confirmation dialog component that displays before deleting vault items, showing item name/type and warning about permanent deletion with Cancel and Delete action buttons.",
+  "frontend/src/components/EditItemDialog.tsx": "Dialog component with tabbed interface for editing existing vault items (logins, cards, notes, identities) with pre-populated form fields and backend integration for saving changes.",
+  "frontend/src/components/ErrorBoundary.tsx": "React class-based error boundary that catches uncaught render errors and displays a user-friendly fallback UI with an error message and a \"Reload Page\" button that calls window.location.reload()."
+}

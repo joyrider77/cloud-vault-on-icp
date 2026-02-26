@@ -1,0 +1,73 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Fix app loading failure with robust error handling and auth initialization",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Add top-level error boundary to catch render errors and display fallback UI",
+      "acceptanceCriteria": [
+        "A React ErrorBoundary wraps the root router/layout so that uncaught render errors show a readable fallback message instead of a blank page.",
+        "The fallback UI includes a 'Reload' button that calls window.location.reload()."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ErrorBoundary.tsx",
+          "operation": "create",
+          "description": "Create a React error boundary component that catches JavaScript errors during render. Display a user-friendly fallback UI with error details and a reload button that calls window.location.reload(). Use Tailwind styling consistent with the app theme."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the entire RouterProvider and Layout component tree with the new ErrorBoundary component to catch any uncaught render errors and prevent blank screens. Place the ErrorBoundary as the outermost wrapper inside the return statement."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Guard router initialization until authentication state is fully resolved",
+      "acceptanceCriteria": [
+        "While the AuthClient is initializing, the app displays a centered loading spinner rather than attempting to render routes.",
+        "Once auth state is resolved, the correct route (landing or vault) renders without a blank or broken state."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add conditional rendering logic that checks the isInitializing state from useInternetIdentity before rendering the RouterProvider. While isInitializing is true, display a centered loading spinner using Tailwind classes. Only render the router once authentication state is fully resolved to prevent race conditions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Make LandingPage login button resilient to auth initialization errors with proper error handling",
+      "acceptanceCriteria": [
+        "Clicking 'Get Started' while auth is still initializing shows a loading state on the button.",
+        "If the Internet Identity login call throws, an error toast is displayed and the button returns to its default state.",
+        "Authenticated users visiting the landing page are immediately redirected to /vault."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/LandingPage.tsx",
+          "operation": "modify",
+          "description": "Wrap the handleLogin function in a try/catch block to handle Internet Identity login errors gracefully. Show a loading state on the 'Get Started' button while auth is initializing or login is in progress. On error, display a user-friendly toast message using the existing toast system and reset button state. Ensure authenticated users are redirected to /vault immediately on page load using a useEffect with navigate."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Wrap actor creation in try/catch to prevent crashes when backend instantiation fails",
+      "acceptanceCriteria": [
+        "If actor creation fails, the hook returns null/undefined without throwing.",
+        "React Query hooks that use the actor handle a null actor by skipping the fetch and not crashing the component tree."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add null/undefined checks for the actor parameter in all query and mutation hooks. When actor is null or undefined, queries should return early with empty data and enabled: false to prevent fetch attempts. Mutations should return early or show error state. Ensure no component crashes when the actor fails to instantiate."
+        }
+      ]
+    }
+  ]
+}

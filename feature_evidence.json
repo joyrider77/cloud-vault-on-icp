@@ -1,0 +1,78 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-a-top-level-error-boundary-in-app-tsx-that-catches-javascript-errors-during-initial-render-and-displays-a-fallback-ui-instead-of-a-blank-screen",
+      "featureTitle": "Add a top-level error boundary in App.tsx that catches JavaScript errors during initial render and displays a fallback UI instead of a blank screen.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ErrorBoundary.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-guard-the-app-router-initialization-so-that-the-authentication-state-from-internetidentityprovider-is-fully-resolved-before-any-route-component-renders-showing-a-loading-spinner-in-the-meantime",
+      "featureTitle": "Guard the App router initialization so that the authentication state from InternetIdentityProvider is fully resolved before any route component renders, showing a loading spinner in the meantime.",
+      "files": [
+        "frontend/src/App.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-make-the-landingpage-get-started-button-resilient-to-auth-initialization-errors-wrap-the-login-call-in-a-try-catch-display-a-user-friendly-error-toast-on-failure-and-never-leave-the-button-in-a-permanently-disabled-or-silent-fail-state",
+      "featureTitle": "Make the LandingPage 'Get Started' button resilient to auth initialization errors: wrap the login call in a try/catch, display a user-friendly error toast on failure, and never leave the button in a permanently disabled or silent-fail state.",
+      "files": [
+        "frontend/src/pages/LandingPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-wrap-the-useactor-hook-s-actor-creation-in-a-try-catch-so-that-a-failure-to-instantiate-the-backend-actor-does-not-crash-the-app-instead-queries-that-depend-on-the-actor-should-gracefully-return-an-empty-error-state",
+      "featureTitle": "Wrap the useActor hook's actor creation in a try/catch so that a failure to instantiate the backend actor does not crash the app; instead, queries that depend on the actor should gracefully return an empty/error state.",
+      "files": [
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
